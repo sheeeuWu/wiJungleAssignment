@@ -125,8 +125,8 @@ const ChartForm = () => {
   console.log("data", chartData, chartType);
   
   return (
-    <div>
-      <input type="file" accept=".csv" onChange={handleFileChange} />
+    <div className="text-center font-sans">
+      <input className="mb-6" type="file" accept=".csv" onChange={handleFileChange} />
       <select value={chartType} onChange={handleChartTypeChange}>
         <option value="">Select Chart Type</option>
         <option value="bar">Bar Graph</option>
@@ -135,7 +135,6 @@ const ChartForm = () => {
         <option value="doughnut">Doughnut Chart</option> 
         <option value="polar">Polar Chart</option> 
         <option value="radar">Radar Chart</option> 
-        {/* Add more chart types as needed */}
       </select>
       {chartData && chartType === "pie" && <Pie data={chartData} />}
       {chartData && chartType === "bar" && (
