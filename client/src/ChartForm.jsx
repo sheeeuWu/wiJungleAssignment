@@ -184,7 +184,7 @@ const ChartForm = () => {
     <div className="text-center font-sans">
       <label  className="custom-file-upload font-sans">
         <input className="mb-6 mr-10" id="file-upload" type="file" accept=".csv" onChange={handleFileChange} />
-        Custom Upload
+        Upload CSV File
       </label>
       <select className="border-2 border-[#f4a8b8] rounded mb-6 mr-10" value={chartType} onChange={handleChartTypeChange}>
         <option className="bg-[#f4a8b8]"  value="">Select Chart Type</option>
