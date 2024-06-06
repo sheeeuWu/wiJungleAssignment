@@ -33,6 +33,14 @@ app.post('/savedata', async (req, res) => {
     }
 });
 
-// Start the server
+app.get('/getdata', async (req, res) => {
+    try {
+        const data = await GraphData.find();
+        res.status(200).json(data);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server started on port ${port}`));

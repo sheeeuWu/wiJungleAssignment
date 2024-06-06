@@ -111,6 +111,19 @@ const ChartForm = () => {
     }
   }, [chartData, chartType]);
   console.log("data", chartData, chartType);
+
+  useEffect(() => {
+      console.log('inside axios');
+      axios.get('http://localhost:5000/getdata')
+        .then((response) => {
+          console.log('Saved Data ', response);
+        })
+        .catch((error) => {
+          console.error('There was an error saving the data!', error);
+        });
+  }, []);
+  console.log("data", chartData, chartType);
+  
   return (
     <div>
       <input type="file" accept=".csv" onChange={handleFileChange} />
