@@ -12,3 +12,12 @@ input[type="file"] {
     margin-right: 10rem;
     padding: 1px 3px;
 }
+
+.chart-dimension{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 60%;
+    margin: 20px auto;
+}

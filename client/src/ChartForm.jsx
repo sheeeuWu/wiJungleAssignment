@@ -195,23 +195,26 @@ const ChartForm = () => {
         <option className=""  value="polar">Polar Chart</option> 
         <option className=""  value="radar">Radar Chart</option> 
       </select>
-      {chartData && chartType === "pie" && 
-      <Pie options={PieOption} data={chartData} />}
-      {chartData && chartType === "bar" && (
-        <Bar options={BarOption} data={chartData} />
-      )}
-      {chartData && chartType === "line" && (
-        <Line options={LineOption} data={chartData} />
-      )}
-      {chartData && chartType === "doughnut" && (
-        <Doughnut options={DoughnutOption} data={chartData} />
-      )}
-      {chartData && chartType === "polar" && (
-        <PolarArea options={PolarOption} data={chartData} />
-      )}
-      {chartData && chartType === "radar" && (
-        <Radar options={RadarOption} data={chartData} />
-      )}
+      <div className="chart-dimension">
+        {chartData && chartType === "pie" && (
+        <Pie options={PieOption} data={chartData} />
+        )}
+        {chartData && chartType === "bar" && (
+          <Bar options={BarOption} data={chartData} />
+        )}
+        {chartData && chartType === "line" && (
+          <Line options={LineOption} data={chartData} />
+        )}
+        {chartData && chartType === "doughnut" && (
+          <Doughnut options={DoughnutOption} data={chartData} />
+        )}
+        {chartData && chartType === "polar" && (
+          <PolarArea options={PolarOption} data={chartData} />
+        )}
+        {chartData && chartType === "radar" && (
+          <Radar options={RadarOption} data={chartData} />
+        )}
+      </div>
     </div>
   );
 };
