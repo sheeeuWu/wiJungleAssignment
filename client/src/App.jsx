@@ -7,7 +7,7 @@ const App = () => {
 
   return (
     <div>
-      <h1 className='text-4xl font-bold font-sans text-center m-7'>Chart Generator</h1>
+      <h1 className='text-4xl font-bold font-sans text-center mt-5 mb-7'>Chart Generator</h1>
       <ChartForm />
     </div>
   );

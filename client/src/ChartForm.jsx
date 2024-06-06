@@ -15,6 +15,9 @@ import {
   Filler,
   RadialLinearScale
 } from "chart.js";
+import "./chartForm.css"
+
+
 ChartJS.register(
   ArcElement,
   Tooltip,
@@ -73,7 +76,8 @@ const ChartForm = () => {
     setChartType(e.target.value);
     
   };
-  const options = {
+
+  const PieOption = {
     responsive: true,
     plugins: {
       legend: {
@@ -81,11 +85,11 @@ const ChartForm = () => {
       },
       title: {
         display: true,
-        text: "Chart.js Bar Chart",
+        text: "Pie Chart",
       },
     },
-  };
-  const Lineoptions = {
+  }; 
+  const LineOption = {
     responsive: true,
     plugins: {
       legend: {
@@ -93,10 +97,59 @@ const ChartForm = () => {
       },
       title: {
         display: true,
-        text: "Chart.js Line Chart",
+        text: "Line Chart",
       },
     },
   };
+  const BarOption = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Bar Chart",
+      },
+    },
+  };
+
+  const DoughnutOption = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Doughnut Chart",
+      },
+    },
+  };
+  const PolarOption = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Polar Chart",
+      },
+    },
+  };
+  const RadarOption = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Radar Chart",
+      },
+    },
+  };  
 
   useEffect(() => {
     if (chartData && chartType !== '') {
@@ -123,34 +176,41 @@ const ChartForm = () => {
         });
   }, []);
   console.log("data", chartData, chartType);
+
+
+
   
   return (
     <div className="text-center font-sans">
-      <input className="mb-6" type="file" accept=".csv" onChange={handleFileChange} />
-      <select value={chartType} onChange={handleChartTypeChange}>
-        <option value="">Select Chart Type</option>
-        <option value="bar">Bar Graph</option>
-        <option value="pie">Pie Chart</option>
-        <option value="line">Line Chart</option> 
-        <option value="doughnut">Doughnut Chart</option> 
-        <option value="polar">Polar Chart</option> 
-        <option value="radar">Radar Chart</option> 
+      <label  className="custom-file-upload font-sans">
+        <input className="mb-6 mr-10" id="file-upload" type="file" accept=".csv" onChange={handleFileChange} />
+        Custom Upload
+      </label>
+      <select className="border-2 border-[#f4a8b8] rounded mb-6 mr-10" value={chartType} onChange={handleChartTypeChange}>
+        <option className="bg-[#f4a8b8]"  value="">Select Chart Type</option>
+        <option className=""  value="pie">Pie Chart</option>
+        <option className=""  value="line">Line Chart</option> 
+        <option className=""  value="bar">Bar Graph</option>
+        <option className=""  value="doughnut">Doughnut Chart</option> 
+        <option className=""  value="polar">Polar Chart</option> 
+        <option className=""  value="radar">Radar Chart</option> 
       </select>
-      {chartData && chartType === "pie" && <Pie data={chartData} />}
+      {chartData && chartType === "pie" && 
+      <Pie options={PieOption} data={chartData} />}
       {chartData && chartType === "bar" && (
-        <Bar options={options} data={chartData} />
+        <Bar options={BarOption} data={chartData} />
       )}
       {chartData && chartType === "line" && (
-        <Line options={Lineoptions} data={chartData} />
+        <Line options={LineOption} data={chartData} />
       )}
       {chartData && chartType === "doughnut" && (
-        <Doughnut data={chartData} />
+        <Doughnut options={DoughnutOption} data={chartData} />
       )}
       {chartData && chartType === "polar" && (
-        <PolarArea data={chartData} />
+        <PolarArea options={PolarOption} data={chartData} />
       )}
       {chartData && chartType === "radar" && (
-        <Radar data={chartData} />
+        <Radar options={RadarOption} data={chartData} />
       )}
     </div>
   );
