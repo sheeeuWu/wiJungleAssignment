@@ -36,6 +36,6 @@ mongoose
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
     
     /* ONLY ADD DATA ONE TIME */ 
-    GraphData.insertMany(chartData);
+    // GraphData.insertMany(chartData);
 })
 .catch((error) => console.log(`${error} did not connect`));
