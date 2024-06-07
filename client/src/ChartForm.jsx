@@ -34,30 +34,23 @@ ChartJS.register(
 const ChartForm = () => {
   const [chartData, setChartData] = useState(null);
   const [chartType, setChartType] = useState("");
+  // const [labels,setLabels]=useState()
+  // const [values,setValues]=useState()
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const csvData = event.target.result;
-      processData(csvData);
-    };
-    reader.readAsText(file);
-  };
+  //   const reader = new FileReader();
+  //   reader.onload = (event) => {
+  //     const csvData = event.target.result;
+  //     processData(csvData);
+  //   };
+  //   reader.readAsText(file);
+  // };
 
-  const processData = (csvData) => {
-    const rows = csvData.split("\n");
-    const labels = [];
-    const values = [];
-    for (let i = 0; i < rows.length; i++) {
-      const row = rows[i].split(",");
-      if (row.length >= 2) {
-        labels.push(row[0]);
-        values.push(parseInt(row[1]));
-      }
-    }
+  const processData = (labels, values) => {
+    
     const chartData = {
       labels,
       datasets: [
@@ -152,24 +145,12 @@ const ChartForm = () => {
   };  
 
   useEffect(() => {
-    if (chartData && chartType !== '') {
-      console.log('inside axios');
-      axios.post('http://localhost:5000/savedata', { chartData, chartType })
-        .then((response) => {
-          console.log('response is ', response);
-        })
-        .catch((error) => {
-          console.error('There was an error saving the data!', error);
-        });
-    }
-  }, [chartData, chartType]);
-  console.log("data", chartData, chartType);
-
-  useEffect(() => {
       console.log('inside axios');
       axios.get('http://localhost:5000/getdata')
-        .then((response) => {
-          console.log('Saved Data ', response);
+      .then((response) => {
+          const graphData = response.data
+          console.log('Saved Data ', graphData);
+          processData(graphData[0].months,graphData[0].sales)
         })
         .catch((error) => {
           console.error('There was an error saving the data!', error);
@@ -182,10 +163,6 @@ const ChartForm = () => {
   
   return (
     <div className="text-center font-sans">
-      <label  className="custom-file-upload font-sans">
-        <input className="mb-6 mr-10" id="file-upload" type="file" accept=".csv" onChange={handleFileChange} />
-        Upload CSV File
-      </label>
       <select className="border-2 border-[#f4a8b8] rounded mb-6 mr-10" value={chartType} onChange={handleChartTypeChange}>
         <option className="bg-[#f4a8b8]"  value="">Select Chart Type</option>
         <option className=""  value="pie">Pie Chart</option>
