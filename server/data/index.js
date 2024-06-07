@@ -9,7 +9,7 @@ export const chartData = [
             9000, 9500, 10000, 11000, 12000, 15000
         ],
         charts: ["pie", "line", "bar", "doughnut", "polar", "radar"],
-        height: 400,
-        width: 600
+        height: 500,
+        width: 700
     }
 ];

@@ -31,25 +31,14 @@ ChartJS.register(
   Filler,
   RadialLinearScale
 );
+
+
 const ChartForm = () => {
   const [chartData, setChartData] = useState(null);
   const [chartType, setChartType] = useState("");
-  // const [labels,setLabels]=useState()
-  // const [values,setValues]=useState()
 
-  // const handleFileChange = (e) => {
-  //   const file = e.target.files[0];
-  //   if (!file) return;
 
-  //   const reader = new FileReader();
-  //   reader.onload = (event) => {
-  //     const csvData = event.target.result;
-  //     processData(csvData);
-  //   };
-  //   reader.readAsText(file);
-  // };
-
-  const processData = (labels, values) => {
+  const processData = (labels, values, charts, height, width) => {
     
     const chartData = {
       labels,
@@ -62,7 +51,8 @@ const ChartForm = () => {
         },
       ],
     };
-    setChartData(chartData);
+
+    setChartData({ chartData, charts, height, width });
   };
 
   const handleChartTypeChange = (e) => {
@@ -151,9 +141,9 @@ const ChartForm = () => {
       console.log('inside axios');
       axios.get('http://localhost:5000/getdata')
       .then((response) => {
-          const graphData = response.data
+          const graphData = response.data[0]
           console.log('Saved Data ', graphData);
-          processData(graphData[0].months,graphData[0].sales)
+          processData(graphData.months, graphData.sales, graphData.charts, graphData.height, graphData.width)
         })
         .catch((error) => {
           console.error('There was an error saving the data!', error);
@@ -168,31 +158,28 @@ const ChartForm = () => {
     <div className="text-center font-sans">
       <select className="border-2 border-[#f4a8b8] rounded mb-6 mr-10" value={chartType} onChange={handleChartTypeChange}>
         <option className="bg-[#f4a8b8]"  value="">Select Chart Type</option>
-        <option className=""  value="pie">Pie Chart</option>
-        <option className=""  value="line">Line Chart</option> 
-        <option className=""  value="bar">Bar Graph</option>
-        <option className=""  value="doughnut">Doughnut Chart</option> 
-        <option className=""  value="polar">Polar Chart</option> 
-        <option className=""  value="radar">Radar Chart</option> 
+        {chartData?.charts.map((chart) => (
+          <option key={chart} value={chart}>{chart.charAt(0).toUpperCase() + chart.slice(1)} Chart</option>
+        ))}
       </select>
-      <div className="chart-dimension">
+      <div className="chart-dimension" style={{ height: chartData?.height, width: chartData?.width }}>
         {chartData && chartType === "pie" && (
-        <Pie options={PieOption} data={chartData} />
+        <Pie options={PieOption} data={chartData.chartData} />
         )}
         {chartData && chartType === "bar" && (
-          <Bar options={BarOption} data={chartData} />
+          <Bar options={BarOption} data={chartData.chartData} />
         )}
         {chartData && chartType === "line" && (
-          <Line options={LineOption} data={chartData} />
+          <Line options={LineOption} data={chartData.chartData} />
         )}
         {chartData && chartType === "doughnut" && (
-          <Doughnut options={DoughnutOption} data={chartData} />
+          <Doughnut options={DoughnutOption} data={chartData.chartData} />
         )}
         {chartData && chartType === "polar" && (
-          <PolarArea options={PolarOption} data={chartData} />
+          <PolarArea options={PolarOption} data={chartData.chartData} />
         )}
         {chartData && chartType === "radar" && (
-          <Radar options={RadarOption} data={chartData} />
+          <Radar options={RadarOption} data={chartData.chartData} />
         )}
       </div>
     </div>
