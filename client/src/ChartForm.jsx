@@ -67,9 +67,10 @@ const ChartForm = () => {
 
   const handleChartTypeChange = (e) => {
     setChartType(e.target.value);
-    
   };
+  
 
+  //char.js 
   const PieOption = {
     responsive: true,
     plugins: {
@@ -144,6 +145,8 @@ const ChartForm = () => {
     },
   };  
 
+
+  //api 
   useEffect(() => {
       console.log('inside axios');
       axios.get('http://localhost:5000/getdata')

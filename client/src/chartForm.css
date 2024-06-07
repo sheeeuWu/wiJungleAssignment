@@ -1,18 +1,3 @@
-/* select.decorated option:hover {
-    box-shadow: 0 0 10px 100px #a81818 inset;
-} */
-
-input[type="file"] {
-    display: none;
-}
-.custom-file-upload {
-    color: black;
-    border: 2px solid #f4a8b8;
-    border-radius: 0.2rem;
-    margin-right: 10rem;
-    padding: 1px 3px;
-}
-
 .chart-dimension{
     display: flex;
     align-items: center;
